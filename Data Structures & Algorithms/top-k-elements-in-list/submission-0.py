@@ -1,0 +1,17 @@
+class Solution:
+    # with a min heap, we keep top k pairs of frequency-val pairs in the list.
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = {}
+        for num in nums:
+            count[num] = count.get(num, 0) + 1
+        
+        heap = []
+        for num in count.keys():
+            heapq.heappush(heap, (count[num], num))
+            if len(heap) > k: # kick the less frequent vals when the size reachs k
+                heapq.heappop(heap)
+        
+        res = []
+        for i in range(k):
+            res.append(heapq.heappop(heap)[1])
+        return res
