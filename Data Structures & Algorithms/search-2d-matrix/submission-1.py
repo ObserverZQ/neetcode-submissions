@@ -1,0 +1,14 @@
+class Solution:
+    # staircase search, time O(m + n), space O(1)
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m = len(matrix)
+        n = len(matrix[0])
+        r, c = 0, n - 1
+        while r < m and c >= 0:
+            if matrix[r][c] > target:
+                c -= 1
+            elif matrix[r][c] < target:
+                r += 1
+            else:
+                return True
+        return False
